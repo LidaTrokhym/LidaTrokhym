@@ -4,11 +4,11 @@ import { SignUpPage } from '../page-objects/SignUpPage';
 const generateUniqueData = () => {
     const timestamp = new Date().getTime();
     const randomSuffix = Math.floor(Math.random() * 1000);
-    const firstName = `Lid${timestamp}`;
-    const lastName = `Tro${randomSuffix}`;
-    const username = `user${timestamp}${randomSuffix}`;
-    const email = `lidatrokhym${timestamp}${randomSuffix}@gmail.com`;
-    const password = `11111111Lida!${randomSuffix}`;
+    const firstName = `${timestamp}`;
+    const lastName = `${timestamp}`;
+    const username = `${timestamp}`;
+    const email = `${timestamp}@gmail.com`;
+    const password = `11111111Lida!`;
 
   return { firstName, lastName, username, email, password };
 };
