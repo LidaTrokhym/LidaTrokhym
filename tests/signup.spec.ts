@@ -1,11 +1,24 @@
 import { test, expect } from '@playwright/test';
 import { SignUpPage } from '../page-objects/SignUpPage';
 
+const generateUniqueData = () => {
+    const timestamp = new Date().getTime();
+    const randomSuffix = Math.floor(Math.random() * 1000);
+    const firstName = `Lid${timestamp}`;
+    const lastName = `Tro${randomSuffix}`;
+    const username = `user${timestamp}${randomSuffix}`;
+    const email = `lidatrokhym${timestamp}${randomSuffix}@gmail.com`;
+    const password = `11111111Lida!${randomSuffix}`;
+
+  return { firstName, lastName, username, email, password };
+};
+
 test('Sign Up', async ({ page }) => {
     const signUpPage = new SignUpPage(page);
+    const { firstName, lastName, username, email, password } = generateUniqueData();
 
 await page.goto('https://gitlab.testautomate.me/users/sign_up');
-await signUpPage.signUp('Lid7', 'Tro7', 'lida_test7', 'lidatrokhym7@gmail.com', '11111111Lida!');
+await signUpPage.signUp(firstName, lastName, username, email, password);
 await signUpPage.selectRoleandObjectiveandButton('other', 'basics', 'Get started!');
 await expect(page).toHaveURL('https://gitlab.testautomate.me/dashboard/projects');
 }
