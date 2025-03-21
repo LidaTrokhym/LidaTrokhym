@@ -7,10 +7,9 @@ export class SignUpPage {
     readonly userName: Locator;
     readonly userEmail: Locator;
     readonly userPassword: Locator;
-    readonly confirmPassword: Locator;
     readonly registerButton: Locator;
     readonly roleDropdown: Locator;
-    readonly objectiveDropdown: Locator;
+    readonly reasonDropdown: Locator;
     readonly startButton: Locator;
 
     constructor(page: Page) {
@@ -23,7 +22,7 @@ export class SignUpPage {
         this.userPassword = page.locator('#new_user_password');
         this.registerButton = page.locator("[data-qa-selector='new_user_register_button']");
         this.roleDropdown = page.locator('#user_role');
-        this.objectiveDropdown = page.locator('#user_registration_objective');
+        this.reasonDropdown = page.locator('#user_registration_objective');
         this.startButton = page.locator("button[name='button']");
     }
 
@@ -37,13 +36,13 @@ export class SignUpPage {
     }
 
     async goto () {
-        await this.page.goto ('https://gitlab.testautomate.users');
+        await this.page.goto ('https://gitlab.testautomate.me/users/sign_up');
     }
 
-    async selectRoleandObjectiveandButton(role, object, button) {
-        await this.roleDropdown.selectOption({ value: role });
-        await this.objectiveDropdown.selectOption({ value: object });
-        await this.startButton.click(button);
+    async selectRoleAndReason(role: string, reason: string) {
+        await this.roleDropdown.selectOption({ label: role });
+        await this.reasonDropdown.selectOption({ label: reason });
+        await this.startButton.click();
     }
     
 }
